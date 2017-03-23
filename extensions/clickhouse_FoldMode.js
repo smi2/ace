@@ -1,4 +1,4 @@
-let define = window.define || window.ace.define;
+var define = window.define || window.ace.define;
 
 define("ace/mode/matching_brace_outdent",["require","exports","module","ace/range"], function(require, exports, module) {
     "use strict";
@@ -45,11 +45,11 @@ define("ace/mode/clickhouse_FoldMode", ["$rootScope", "require", "exports", "mod
     "ace/range",'ace/mode/sqlserver','ace/mode/folding/cstyle'], function (require, exports, module) {
 
 
-    let oop = require("../lib/oop");
-    let BaseFoldMode = require("ace/mode/folding/cstyle").FoldMode;
-    let Range = require("ace/range").Range;
-    let TokenIterator = require("ace/token_iterator").TokenIterator;
-    let FoldMode = exports.FoldMode = function () {
+    var oop = require("../lib/oop");
+    var BaseFoldMode = require("ace/mode/folding/cstyle").FoldMode;
+    var Range = require("ace/range").Range;
+    var TokenIterator = require("ace/token_iterator").TokenIterator;
+    var FoldMode = exports.FoldMode = function () {
 
     };
 
@@ -63,23 +63,23 @@ define("ace/mode/clickhouse_FoldMode", ["$rootScope", "require", "exports", "mod
         this.foldingStartMarker = /\(|\{/;
 
         this.getFoldWidgetRange = function(session, foldStyle, row, forceMultiline) {
-            // let re = this.foldingStartMarker;
-            // let line = session.getLine(row);
-            // let m = line.match(re);
+            // var re = this.foldingStartMarker;
+            // var line = session.getLine(row);
+            // var m = line.match(re);
             // были ли вообще совпадения по ( SELECT
             //if (!m) return;
 
             // позиционируем TokenIterator на нужную строку
-            let iterator = new TokenIterator(session, row, 0);
+            var iterator = new TokenIterator(session, row, 0);
             //  получаем token
-            let token = iterator.getCurrentToken();
+            var token = iterator.getCurrentToken();
 
-            let range=false;
+            var range=false;
             // if find : ` ( SELECT `
             while (token) {
-                let t = token;
+                var t = token;
                 // позиция текущего токена
-                let pos = iterator.getCurrentTokenPosition();
+                var pos = iterator.getCurrentTokenPosition();
                 token = iterator.stepForward();
                 // если текущий токен скобка а следующий текст и далее SELECT
                 if (t.type=='paren.lparen' && ( t.value=='(' || t.value=='{') )// && token.type
@@ -106,4 +106,3 @@ define("ace/mode/clickhouse_FoldMode", ["$rootScope", "require", "exports", "mod
         };
     }).call(FoldMode.prototype);
 });
-

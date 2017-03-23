@@ -8,17 +8,17 @@ ace.define("ace/mode/clickhouse", ["require", "exports", "module", "ace/lib/oop"
 ], function (require, exports) {
     "use strict";
 
-    let oop = require("../lib/oop");
-    let TextMode = require("./text").Mode;
-    let ClickhouseHighlightRules = require("./clickhouse_highlight_rules").ClickhouseHighlightRules;
-    let ClickhouseFoldMode = require("./clickhouse_FoldMode").FoldMode;
-    let MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
-    let CstyleBehaviour = require("./behaviour/cstyle").CstyleBehaviour;
+    var oop = require("../lib/oop");
+    var TextMode = require("./text").Mode;
+    var ClickhouseHighlightRules = require("./clickhouse_highlight_rules").ClickhouseHighlightRules;
+    var ClickhouseFoldMode = require("./clickhouse_FoldMode").FoldMode;
+    var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutdent;
+    var CstyleBehaviour = require("./behaviour/cstyle").CstyleBehaviour;
     // var CStyleFoldMode = require("./folding/cstyle").FoldMode;
 
-    // let BaseFoldMode = require("ace/mode/folding/cstyle").FoldMode;
+    // var BaseFoldMode = require("ace/mode/folding/cstyle").FoldMode;
 
-    let Mode = function () {
+    var Mode = function () {
 
         this.foldingRules = new ClickhouseFoldMode();
         this.$outdent = new MatchingBraceOutdent();
@@ -53,20 +53,20 @@ ace.define("ace/mode/clickhouse", ["require", "exports", "module", "ace/lib/oop"
         this.findTokens = function (sql, type, needfirst) {
             sql = sql.replace(/^(\r\n|\n|\r)/gm, "").replace(/(\r\n|\n|\r)$/gm, "");
 
-            let TokenIterator = require("ace/token_iterator").TokenIterator;
+            var TokenIterator = require("ace/token_iterator").TokenIterator;
 
-            let EditSession = require("ace/edit_session").EditSession;
-
-
-            let session = new EditSession(sql, this);
+            var EditSession = require("ace/edit_session").EditSession;
 
 
-            let iterator = new TokenIterator(session, 0, 0);
-            let token = iterator.getCurrentToken();
-            let matches = [];
+            var session = new EditSession(sql, this);
+
+
+            var iterator = new TokenIterator(session, 0, 0);
+            var token = iterator.getCurrentToken();
+            var matches = [];
 
             while (token) {
-                let t = token;
+                var t = token;
                 t['row'] = iterator.getCurrentTokenRow();
                 t['col'] = iterator.getCurrentTokenColumn();
                 if (t.type == type) {
@@ -97,24 +97,24 @@ ace.define("ace/mode/clickhouse", ["require", "exports", "module", "ace/lib/oop"
         this.splitByTokens = function (sql, type, value) {
             sql = sql.replace(/^(\r\n|\n|\r)/gm, "").replace(/(\r\n|\n|\r)$/gm, "");
 
-            let TokenIterator = require("ace/token_iterator").TokenIterator;
-            let EditSession = require("ace/edit_session").EditSession;
-            let Range = require("ace/range").Range;
+            var TokenIterator = require("ace/token_iterator").TokenIterator;
+            var EditSession = require("ace/edit_session").EditSession;
+            var Range = require("ace/range").Range;
 
-            let session = new EditSession(sql, this);
+            var session = new EditSession(sql, this);
 
             session.bgTokenizer.start(0);// force rehighlight whole document
             // foreach $rules find type=$type and update value
 
-            let iterator = new TokenIterator(session, 0, 0);
+            var iterator = new TokenIterator(session, 0, 0);
 
-            let token = iterator.getCurrentToken();
-            let matches = [];
-            let startRow = 0, startCol = 0;
-            let trimValue=false;
-            let range1, text;
+            var token = iterator.getCurrentToken();
+            var matches = [];
+            var startRow = 0, startCol = 0;
+            var trimValue=false;
+            var range1, text;
             while (token) {
-                let t = token;
+                var t = token;
 
                 t['row'] = iterator.getCurrentTokenRow();
                 t['col'] = iterator.getCurrentTokenColumn();
@@ -128,7 +128,7 @@ ace.define("ace/mode/clickhouse", ["require", "exports", "module", "ace/lib/oop"
                     )
                 )
                 {
-                    let vl=0;
+                    var vl=0;
                     if (value instanceof String) vl=value.length;
 
                     // bug : col + vl - не корректно, возможен случай смешение строки

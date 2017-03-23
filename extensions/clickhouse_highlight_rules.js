@@ -2,27 +2,27 @@
 define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScope", "module", "ace/lib/oop", "ace/snippets", 'ace/ext/language_tools' ,"ace/mode/text_highlight_rules"], function (require, exports,$rootScope) {
     "use strict";
 
-    let oop = require("../lib/oop");
-    let TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
+    var oop = require("../lib/oop");
+    var TextHighlightRules = require("./text_highlight_rules").TextHighlightRules;
 
 
-    let ClickhouseHighlightRules = function () {
-        let keywords = (
+    var ClickhouseHighlightRules = function () {
+        var keywords = (
             "SELECT|INSERT|UPDATE|DELETE|FROM|WHERE|AND|OR|LIMIT|OFFSET|HAVING|AS|" +
             "WHEN|ELSE|END|TYPE|LEFT|RIGHT|JOIN|ON|OUTER|DESC|ASC|UNION|CREATE|TABLE|PRIMARY|KEY|" +
             "FOREIGN|NOT|REFERENCES|DEFAULT|NULL|INNER|CROSS|NATURAL|DATABASE|DROP|GRANT|" +
             "ANY|ATTACH|DETACH|DESCRIBE|OPTIMIZE|PREWHERE|TOTALS|DATABASES|PROCESSLIST|SHOW|IF"
         );
-        // let identifier = "[$A-Za-z_\\x7f-\\uffff][$\\w\\x7f-\\uffff]*";
-        let keywordsDouble = "IF\\W+NOT\\W+EXISTS|IF\\W+EXISTS|FORMAT\\W+Vertical|FORMAT\\W+JSONCompact|FORMAT\\W+JSONEachRow|FORMAT\\W+TSKV|FORMAT\\W+TabSeparatedWithNames|FORMAT\\W+TabSeparatedWithNamesAndTypes|FORMAT\\W+TabSeparatedRaw|FORMAT\\W+BlockTabSeparated|FORMAT\\W+CSVWithNames|FORMAT\\W+CSV|FORMAT\\W+JSON|FORMAT\\W+TabSeparated";
+        // var identifier = "[$A-Za-z_\\x7f-\\uffff][$\\w\\x7f-\\uffff]*";
+        var keywordsDouble = "IF\\W+NOT\\W+EXISTS|IF\\W+EXISTS|FORMAT\\W+Vertical|FORMAT\\W+JSONCompact|FORMAT\\W+JSONEachRow|FORMAT\\W+TSKV|FORMAT\\W+TabSeparatedWithNames|FORMAT\\W+TabSeparatedWithNamesAndTypes|FORMAT\\W+TabSeparatedRaw|FORMAT\\W+BlockTabSeparated|FORMAT\\W+CSVWithNames|FORMAT\\W+CSV|FORMAT\\W+JSON|FORMAT\\W+TabSeparated";
 
-        let builtinConstants = (
+        var builtinConstants = (
             "true|false"
         );
 
-        let builtinFunctions = ("sum|sumIf|avg|avgIf");
+        var builtinFunctions = ("sum|sumIf|avg|avgIf");
 
-        let dataTypes = (
+        var dataTypes = (
             "int|numeric|decimal|date|varchar|char|bigint|float|double|bit|binary|text|set|timestamp|" +
             "money|real|number|integer|" +
             "uint8|uint16|uint32|uint64|int8|int16|int32|int64|float32|float64|datetime|enum8|enum16|" +
@@ -33,14 +33,14 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
         if (window.global_builtinFunctions) {
 
             // автодополнение builtin Functions
-            let builtin=[];
+            var builtin=[];
             window.global_builtinFunctions.forEach(function (v) {
                 builtin.push(v.name);
             });
             builtinFunctions=builtin.join('|');
         };
         //
-        let delit='';
+        var delit='';
         if (window.global_delimiter)
         {
             delit=new RegExp(window.global_delimiter);
@@ -48,9 +48,9 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
         else{
             delit=new RegExp(';;');
         }
-        let drawCommand="DRAW\\W+AREA|DRAW\\W+BAR|DRAW\\W+HEATMAP|DRAW\\W+HISTOGRAM|DRAW\\W+LINE|DRAW\\W+POINT|DRAW\\W+PIVOT";
+        var drawCommand="DRAW\\W+AREA|DRAW\\W+BAR|DRAW\\W+HEATMAP|DRAW\\W+HISTOGRAM|DRAW\\W+LINE|DRAW\\W+POINT|DRAW\\W+PIVOT";
 
-        let keywordMapper = this.createKeywordMapper({
+        var keywordMapper = this.createKeywordMapper({
             "support.function": builtinFunctions,
             "keyword": keywords,
             "constant.language": builtinConstants,
@@ -123,11 +123,11 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
         this.normalizeRules();
 
         // ------------------------------------------------------------------------------
-        let makeCompletionsDocFunctions = function (fn, origin,comb) {
+        var makeCompletionsDocFunctions = function (fn, origin,comb) {
 
 
-            let body='<span>';
-            let use=fn;
+            var body='<span>';
+            var use=fn;
 
             if (window.global_chFunctionsHelp && typeof window.global_chFunctionsHelp['functions'][fn] != 'undefined')
             {
@@ -140,10 +140,10 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
 
             if (window.global_chFunctionsHelp && typeof window.global_chFunctionsHelp['functions'][use] != 'undefined')
             {
-                let help=window.global_chFunctionsHelp['functions'][use];
-                let brackets='';
-                let desc_ru='';
-                let desc_en='';
+                var help=window.global_chFunctionsHelp['functions'][use];
+                var brackets='';
+                var desc_ru='';
+                var desc_en='';
                 if (help['desc']['ru'])
                 {
                     brackets=help['bracket'];
@@ -161,12 +161,12 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
             return body+ '<a title="close" class="ace_doc-tooltip-boxclose"></a></span></div>';
         };
         // ------------------------------------------------------------------------------
-        let makeCompletionsdocHTML = function (name, meta) {
+        var makeCompletionsdocHTML = function (name, meta) {
             return '<div style="padding: 15px 5px 5px 15px"><b>' + name + '</b><br>' + meta + '</div>';
         };
         // ------------------------------------------------------------------------------
-        let completions = [];
-        let addCompletions = function (arr, meta,icon) {
+        var completions = [];
+        var addCompletions = function (arr, meta,icon) {
             arr.forEach(function (v) {
 
 
@@ -233,9 +233,9 @@ define("ace/mode/clickhouse_highlight_rules", [ "require", "exports", "$rootScop
             // автодополнение полей таблицы
             window.global_keywords_fieldsList.forEach(function (v) {
 
-                    let name = v['table'] + '.' + v['name'];
-                    let value = v['name'];
-                    let meta = "type:" + v['type'] + '<br><br>default_type:' + v['default_type'] + '<br>' + v['default_expression'];
+                    var name = v['table'] + '.' + v['name'];
+                    var value = v['name'];
+                    var meta = "type:" + v['type'] + '<br><br>default_type:' + v['default_type'] + '<br>' + v['default_expression'];
 
                     completions.push({
                         name: name,
