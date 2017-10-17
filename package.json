@@ -2,15 +2,15 @@
   "name": "ace",
   "version": "1.2.6.2",
   "description": "Ace (Ajax.org Cloud9 Editor)",
-  "main":  "ace.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/smi2/ace.git"
-    },
-   "author": "",
-    "license": "GPLv3.0",
-    "bugs": {
-        "url": "https://github.com/smi2/ace/issues"
-    },
-    "homepage": "https://github.com/smi2/ace"
+  "main": "ace.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smi2/ace.git"
+  },
+  "author": "",
+  "license": "GPLv3.0",
+  "bugs": {
+    "url": "https://github.com/smi2/ace/issues"
+  },
+  "homepage": "https://github.com/smi2/ace"
 }
