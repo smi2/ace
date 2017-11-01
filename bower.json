@@ -1,6 +1,6 @@
 {
     "name": "ace",
-    "version": "1.2.6.1",
+    "version": "1.2.10.1",
     "description": "Ace (Ajax.org Cloud9 Editor)",
     "main": [
         "ace.js",
@@ -44,12 +44,10 @@
         "extensions/ext-whitespace.js",
         "extensions/ext-language_tools.js",
         "extensions/ext-spellcheck.js",
+        "extensions/ext-searchbox.js",
         "extensions/mode-php.js",
+        "extensions/mode-javascript.js",
         "extensions/mode-sqlserver.js",
-        "extensions/mode-clickhouse-doctooltip.js",
-        "extensions/mode-clickhouse.js",
-        "extensions/clickhouse_FoldMode.js",
-        "extensions/clickhouse_highlight_rules.js"
     ],
     "repository": {
         "type": "git",
