@@ -47,7 +47,7 @@
         "extensions/ext-searchbox.js",
         "extensions/mode-php.js",
         "extensions/mode-javascript.js",
-        "extensions/mode-sqlserver.js",
+        "extensions/mode-sqlserver.js"
     ],
     "repository": {
         "type": "git",
